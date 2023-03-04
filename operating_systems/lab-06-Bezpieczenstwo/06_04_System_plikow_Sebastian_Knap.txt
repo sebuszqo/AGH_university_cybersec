@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+
+KOMENDY DO ZADANIA 4:
+1. Utworzenie pustego pliku o rozmiarze 1GB z pomocą polecenia dd
+ "dd if=/dev/zero of=losowy.dat bs=1G count=1"
+
+2. Podłączenie utworzonego pliku do SO jako urządzenie blokowe (polecenie: losetup). loop0 - pierwsze urządzenie loopback
+"losetup /dev/loop0 losowy.dat"
+
+3. Utworzenie tablicy partycji i partycji za pomocą polecenia - użyte polecenie gparted
+"gparted /dev/loop0"
+
+4. Zaszyfrowanie wybranej partycji za pomocą polecenia
+ "cryptsetup luksFormat /dev/loop0p1"
+
+5. Podłączenie zaszyfrowanej partycji jako urządzenie blokowe, za pomocą polecenia
+ "cryptsetup luksOpen /dev/loop0p1 zaszyfrowanaPartycja"
+
+6. systemu plików ext4 na wybraną partycję za pomocą polecenia
+"mkfs.ext4 /dev/mapper/zaszyfrowanaPartycja"
+
+7.Zamontowanie utworzonego systemu plików za pomocą polecenia
+"Mount /dev/mapper/zaszyfrowanaPartycja /mnt"
+
+Skrypt do domontowania i odłączania systemu plików:
+#!/bin/bash
+
+DEVICE_NAME=zaszyfrowanaPartycja
+MOUNT_POINT=/mnt
+
+# odmontowanie systemu plików
+umount $MOUNT_POINT
+
+# odłączenie zaszyfrowanego urządzenia
+cryptsetup luksClose $DEVICE_NAME
+
+Zapisać jako np auto_unmount.sh I dodać do crxontaba
+
+-- INSERT --

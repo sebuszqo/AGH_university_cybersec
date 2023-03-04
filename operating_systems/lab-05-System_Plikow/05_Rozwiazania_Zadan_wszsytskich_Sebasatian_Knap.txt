@@ -1,0 +1,127 @@
+####################################################
+LAB-05-SO-System plików - ROZWIAZANIA ZADAN BEZ KODU 
+####################################################
+
+polecenie dd jest narzedziem do kopiowania i konwersji danych
+
+polecenie 'dd' sklada sie z:
+
+'if'= (input file) - okresla zrodlo danych, moze to byc plik lub urzadzenie (np. /dev/zero lub /dev/urandom)
+
+'of'= (output file) - okresla miejsce, do ktorego zostana zapisane dane
+
+'bs'= (block size) - okresla rozmiar bloku danych, ktory jest czytany i zapisywany przy kazdym wywolaniu, mozna okresli w bajtach np. bs=1024 lub kilobajtach bs=1M 
+
+'count'= (count) - okresla liczbe blokow danych ktore maja zostac skopiowane
+ polecenia do utworzenia 2 plikow:
+
+bs=1000000 count=100 - polecenie czyta 100 blokow danych po 1MB kazdy z ... i kopiuje do ...
+
+'dev/urandom/' - plik, ktory zawsze zwraca dane losowe (pseudolosowe)  
+
+----------------------------------------------------------------
+
+'dd if=/dev/zero of=zero.dat bs=1000000 count=100'
+
+'dd uf=/dev/urandom of=losowy.dat bs=1000000 count=100'
+
+----------------------------------------------------------------
+1.1
+pakowanie - program do kompresji:
+
+sprawdzenie wielkosci pliku: 'du -h --block-size=1M zero.dat' lub 'ls -lh' lub 'stat plik.txt' 
+
+'gzip -c zero.dat > zero.dat.gz'
+
+- rozmiar bedzie duzo mniejszy - poniewaz plik zawiera puste wiadomosci ktore sa latwe do zakodowania i skompresowania
+
+'gzip -c losowy.dat > losowy.dat.gz'
+
+- rozmiar tez bedzie mniejszy ale nie bedzie az takiej roznicy jak w przypadku zero.dat poniewaz plik zawiera dane losowe, ktore sa trudniejsze do zakodowania i skompresowania
+i
+----------------------------------------------------------------
+1.2 dowiazania
+
+miekkie
+'ln -s losowy.dat losowy-soft.dat'
+
+rozmiar dowiązania miękkiego (losowy-soft.dat) jest znacznie mniejszy niż rozmiar pliku docelowego (losowy.dat), ponieważ dowiązanie miękkie zajmuje tylko tyle miejsca, ile jest potrzebne na przechowywanie informacji o ściezce do pliku docelowego
+
+'ls -l' etc. pokazuje nam "strzalke" do pliku docelowego
+
+twarde
+'ln losowy.dat losowy-hard.dat'
+
+rozmiar dowiązania twardego (losowy-hard.dat) jest taki sam jak rozmiar pliku docelowego (losowy.dat), ponieważ dowiązanie twarde jest bezpośrednim odwołaniem do pliku docelowego i zajmuje tyle samo miejsca co plik docelowy
+
+---------------------------------------------------------------
+1.3
+
+'dd if=/dev/zero of=pusty.dat bs=1000000 count=1000'
+
+'mkfs.ext4 pusty.dat' - utworz system plikow ext4 na pliku pusty.dat
+
+'mkdir pusty' - katalog w ktorym bedzie zamontowany system plikow
+
+'mount pusty.dat pusty' - zamontowanie systemu plikow ext4 na pliku pusty.dat w katalogu pusty
+
+'/path/to/pusty.dat  /path/to/pusty  ext4  defaults  0  2' - dopisac do pliku /etc/fstab aby umozliwic montowanie systemu plikow przez uzytkownika bez uprawnien root
+
+1.4 przeniesione
+
+--------------------------------------------------------------
+1.5 program w c w pliku kopiuj.c zasada dzialania:
+gcc -o kopiuj kopiuj.c
+./kopiuj <rozmiar bufora> <plik.src> <plik.trg>
+
+zaleznosc wielkosci bufforu od czasu 
+
+buffor[bajt]: --- czas[s]:
+     2		   0.81
+     4             0.43
+     8             0.26
+     10            0.21
+     16            0.18
+     32	           0.11
+     64            0.09
+     128           0.08
+     256           0.15
+     512           0.07 
+    1024           0.07
+---------------------------------------------------------------
+1.6 - zapetlone linkowanie miekkie 
+
+tworze nowy link miekki:
+'ln -s losowowy-soft.dat losowy-soft-2-link.txt'
+
+ aby przetestowac program: 
+'sprawdz-miekkie-linki.sh <katalog>'
+
+po uruchomieniu programu w obecnym katalogu program wypisuje:
+
+"""
+Znaleziono następujące dowiązania miękkie:
+./losowy-soft.dat: /home/sebuszqo/Desktop/Systemy-Operacyjne/lab-05/losowy.dat
+./losowy-soft-2-link.txt: /home/sebuszqo/Desktop/Systemy-Operacyjne/lab-05/losowowy-soft.dat
+Liczba zapętleń: 2
+"""
+--------------------------------------------------------------
+1.7 przypadki hardlinkowania
+
+'./sprawdz-twarde-linki.sh <katalog>'
+"""
+Znaleziono następujące pliki o więcej niż jednym dowiązaniu twardym:
+./losowy-hard.dat: 2 dowiązań twardych
+./losowy.dat: 2 dowiązań twardych
+"""
+
+--------------------------------------------------------------
+1.8 - wypisywanie statystyki plikow
+
+Typ pliku może być "f" (plik zwykły), "d" (katalog), "l" (dowiązanie miękkie), "b" (urządzenie blokowe), "c" (urządzenie znakowe), "p" (potok nazwany) lub "s" (urządzenie specjalne). Zatem liczba możliwych konfiguracji ustawień dostępu dla plików zwykłych wynosi 16121.
+
+Wywołanie 'stat -c "%A %n" "$file"' wyświetli informacje o pliku o nazwie zapisanej w zmiennej $file.
+
+skrypt:
+./statystyka-uprawnien.sh <katalog>
+

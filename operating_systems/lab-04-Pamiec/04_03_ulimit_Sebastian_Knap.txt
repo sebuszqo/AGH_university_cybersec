@@ -1,0 +1,30 @@
+Zadanie 3. Kontrola zajętości pamięci
+
+Ulimit to narzędzie służące do ustawiania ograniczeń dla kont użytkowników lub pojedynczych procesów. Umożliwia ono ustawienie limitów dla różnych zasobów systemu, takich jak maksymalny rozmiar pliku, maksymalna ilość pamięci dostępnej dla procesu itp.
+
+Aby ustawić ograniczenie dla konta użytkownika, należy dodać odpowiednie polecenie do pliku konfiguracyjnego systemu, np. do pliku "/etc/security/limits.conf". Przykładowy wpis w pliku konfiguracyjnym:
+
+'<nazwa_użytkownika> hard <ograniczenie> <wartość>'
+
+Gdzie "nazwa_użytkownika" to nazwa konta użytkownika, "ograniczenie" to nazwa ograniczenia (np. "vmem" dla ograniczenia maksymalnej ilości pamięci dostępnej dla procesu), a "wartość" to wartość ograniczenia (podana w kilobajtach).
+
+
+Przykład użycia "ulimit" do ustawienia ograniczenia maksymalnej ilości pamięci dostępnej dla procesu na wartość 1024 kilobajtów:
+
+'ulimit -v 1024' - kazdy proces po tej komendzie bedzie ograniczony do 1024 kilobajtow - pamiec wirtualna
+
+'ulimit -v 1024' - ograniczenie pamieci fizycznej do 1024 kilobajtow
+
+
+###############
+'ulimit -v 100000' - ogranicznie zadzialalo i po ustaiwnieniu go program zostal zakonczony po przekroczeniu 100000 VIRT w htop
+###############
+
+
+aby ograniczyc proces o danym PID stosujemy komende:
+nie dziala - nie wiem czemu 
+
+'ulimit -p <pid> -v <maksymalny rozmiar pamięci>'
+
+Gdzie "pid" to identyfikator procesu, a "maksymalny rozmiar pamięci" to maksymalna ilość pamięci, jaką może zajmować dany proces (podana w kilobajtach).
+
