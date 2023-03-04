@@ -24,7 +24,7 @@ Alternatively,
   - Like this
   - And this
 
-```pyhton
+```python
 if __name__ = 'main'
 print(Hello World!)
 ```
