@@ -14,7 +14,7 @@ Subject designed to introduce students to the general concepts of computer scien
     1. Cryptography 🔐
 Cryptography - a subject concerning encryption algorithms, symmetric and asymmetric key cryptography, hashing functions, key derivation functions, and more. The repository contains a project for this subject about blockchain. It is an implementation of the Bitcoin blockchain, demonstrating the fundamentals of block creation and the chain's operation. Additionally, there is a PDF file introducing the world of Web 3.0 and the blockchain ecosystem, explaining the basics and showcasing real-world applications of this technology.
 
-    2. Script Programming
+    2. Script Programming 👨‍💻
 Script Programming - a subject aimed at introducing and providing knowledge and skills in the field of scripting using technologies such as Python, JS, node.js, express.js, and React. It mainly focuses on solving tasks independently, creating parts of applications, and executing commands.
 
     3. Operating Systems 💻
