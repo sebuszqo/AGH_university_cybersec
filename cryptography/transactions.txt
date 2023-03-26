@@ -1,0 +1,19 @@
+Ann Bob 0,59
+Ann Bob 0,61
+Ann Bob 0,62
+Ann Bob 0,002163
+Ann Bob 0,64
+Ann Bob 0,64
+Ann Bob 0,00265
+Ann Bob 0,66
+Ann Bob 0,00067
+Ann Bob 0,68
+Ann Bob 0,89
+Ann Bob 0,0070
+Ann Bob 0,71
+Ann Bob 0,32
+Ann Bob 0,66
+Ann Bob 0,021367
+Ann Bob 0,28
+Ann Bob 1,002
+
