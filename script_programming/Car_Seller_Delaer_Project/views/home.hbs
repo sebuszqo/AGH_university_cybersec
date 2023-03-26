@@ -1,0 +1,5 @@
+<h1>Hello, choose what you want to do with your car !</h1>
+<h2>Current transactions:</h2>
+{{# each log}}
+    <p><strong>{{this.name}}</strong> rents an {{this.brand}} {{this.model}} from the year {{this.year}}</p>
+{{/each}}

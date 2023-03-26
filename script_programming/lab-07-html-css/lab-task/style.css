@@ -1,0 +1,103 @@
+body .navbar{
+    background-color: green;
+}
+
+.navbar-expand-lg .navbar-collapse {
+        justify-content: flex-end;
+}
+
+img {
+    margin: 20px;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 50px;
+}
+
+footer{
+    clear: both;
+    background-color: green;
+}
+
+footer p {
+    padding: 10px;
+}
+
+main .card {
+    /*animation: ;*/
+    /*transition: transform .7s ease-in;*/
+    margin: 70px;
+}
+
+main .card{
+    animation: ease-in-out rotating 3s infinite;
+    animation-play-state: paused;
+    /*-webkit-animation: ease-in-out rotating 3s;*/
+    /*-webkit-animation-play-state: paused;*/
+}
+
+main .card:hover{
+    animation-play-state: running;
+    /*-webkit-animation-play-state: running;*/
+}
+
+@keyframes rotating {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg)
+    }
+}
+/*main .card{*/
+/*    animation-play-state: paused;*/
+/*}*/
+
+/*main .card:hover{*/
+/*    animation: ease-in-out rotating 2s infinite;*/
+
+/*}*/
+
+/*@keyframes rotating {*/
+/*    0% {*/
+/*        transform: rotate(0deg);*/
+/*    }*/
+
+/*    100% {*/
+/*        transform: rotate(360deg);*/
+/*    }*/
+/*}*/
+
+
+@media screen
+and (min-width: 200px)
+and (max-width: 500px){
+    .flip-box {
+        width: 100%;
+        clear: left;
+        float: left;
+    }
+    img {
+        width: 1vw;
+        height: 1vw;
+    }
+}
+
+@media screen
+and (min-width: 201px)
+and (max-width: 1000px){
+    .flip-box {
+        float: left;
+        left: 0;
+    }
+    .wrap-two{
+        clear: left;
+        float: left;
+    }
+    img {
+        width: 10vw;
+        height: 80%;
+    }
+}

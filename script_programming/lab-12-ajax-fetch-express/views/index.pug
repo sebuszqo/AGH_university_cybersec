@@ -1,0 +1,240 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title
+            | Form
+        script.
+            /****************************************************************************/
+            /* Function that performs (asynchronous) query to the web server using AJAX */
+            /****************************************************************************/
+            function requestAJAX() {
+                //-----------------------------------------------
+                // Create an object representing the request to the web server — see https://developer.mozilla.org/docs/Web/API/XMLHttpRequest
+                //-----------------------------------------------
+                const xhr = new XMLHttpRequest();
+
+                //-----------------------
+                // Observers registration
+                //-----------------------
+
+                // If the request was successful
+                xhr.addEventListener("load", function (evt) {
+                    if (xhr.status === 200) {
+                        window.alert(xhr.response);
+                        console.log(xhr.response);
+                    }
+                });
+
+                // If the request failed
+                xhr.addEventListener("error", function (evt) {
+                    window.alert('There was a problem with this request.');
+                });
+
+                //--------------------------------------------------------------------------
+                // Configuration and execution of the (asynchronous) query to the web server
+                //--------------------------------------------------------------------------
+
+                //****************************************************************
+                // Type of data received by the 'load' observer - default - 'text'
+                //****************************************************************
+                // Uncomment one of the lines below
+                //*********************************
+                // xhr.responseType ='json';
+                // xhr.responseType ='document';
+
+                xhr.open('GET', '/submit', true);
+
+                //****************************************************************************************
+                // What is the acceptable data type - the server part should return data of the given type
+                // Default value: '*/*'
+                //****************************************************************************************
+                // Uncomment one of the lines below
+                //*********************************
+                // xhr.setRequestHeader('Accept', 'application/json');
+                // xhr.setRequestHeader('Accept', 'application/xml');
+
+                xhr.send(null);
+            }
+
+            /*********************************************************************************/
+            /* Function that performs (asynchronous) query to the web server using Fetch API */
+            /*********************************************************************************/
+            // function requestFetchAPI() {
+            //     fetch('/submit', {
+            //         headers: {
+            //             //****************************************************************************************
+            //             // What is the acceptable data type - the server part should return data of the given type
+            //             // Default value: '*/*'
+            //             //****************************************************************************************
+            //             // Uncomment one of the lines below
+            //             //*********************************
+            //             // 'Accept': 'application/json'
+            //             // 'Accept': 'application/xml'
+            //         }
+            //     }) // Execution of the (asynchronous) query to the web server — a promise is created
+            //         .then((response)=> { // if the promise is fulfilled
+            //             if (!response.ok)
+            //                 throw Error(response.statusText);
+            //             if (response.headers.get("Content-Type") !== 'application/json') {
+            //                 // If the received data is plain text or an XML document
+            //                 response.text().then(value => {
+            //                     window.alert(value);
+            //                 });
+            //
+            //             } else {
+            //                 //If the received data is a JSON document
+            //                 const result = response.json();
+            //                 window.alert(result); // show the Promise object
+            //                 console.log(result);
+            //             }
+            //         })
+            //         .catch(function (error) { // if the promise is rejected
+            //             window.alert(error);
+            //         });
+            // }
+
+            /***********************************************/
+            /* Same as above but using 'async' and 'await' */
+            /***********************************************/
+            async function requestFetchAPI() {
+                try {
+                    let response = await fetch('/submit', {
+                        headers: {
+                            // 'Accept': 'application/json'
+                            // 'Accept': 'application/xml'
+                        }
+                    }) // Execution of the (asynchronous) query to the web server — a promise is created
+
+                    // If the promise is fulfilled, then 'response' has a value
+                    .then((response)=> { // if the promise is fulfilled
+                                   if (!response.ok)
+                                       throw Error(response.statusText);
+                                   if (response.headers.get("Content-Type") !== 'application/json') {
+                                       // If the received data is plain text or an XML document
+                                       response.text().then(value => {
+                                           window.alert(value);
+                                       });
+
+                                   } else {
+                                       //If the received data is a JSON document
+                                       const result = response.json();
+                                       window.alert(result.welcome); // show the Promise object
+                                       console.log(result);
+                                   }
+                               })}
+                               catch (error) { // if the promise is rejected
+                                   window.alert(error);
+                               }
+                       }
+            function sendData() {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/submit');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');  // set the content type header
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const value = xhr.responseText;  // get the response from the server
+                        window.alert(`Witaj ${value}`);  // display the response with window.alert
+                    } else {
+                        console.error('Error sending data');
+                    }
+                };
+                const input = document.querySelector('#imie');
+                const data = `name=${input.value}`;  // create the data to send
+                xhr.send(data);  // send the request with the data
+            }
+            function getAJAX() {
+                const form = document.querySelector('#form');
+                const name = document.querySelector('#imie');
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();  // prevent the form from submitting
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', `/submit?name=${name.value}`);  // append the FormData object to the URL
+                    xhr.onload = () => {
+                        if (xhr.status === 200) {
+                            window.alert(`Witaj ${name.value}`);
+                        } else {
+                            console.error('Error during sending data');
+                        }
+                    };
+                    xhr.send();
+                });
+            }
+
+            function postAJAX() {
+                const form = document.getElementById('form');
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();  // prevent the form from submitting
+                    sendData();  // send the data using AJAX
+                });
+            }
+            function getFetch() {
+                const form = document.querySelector('#form');
+                const name = document.querySelector('#imie');
+                // Get the value of the form element
+
+                // Create the URL with the form value as a query parameter
+                const url = `/submit?name=${name.value}`;
+                console.log(url);
+                // Send a GET request to the server using fetch()
+                fetch(url, {mode: 'no-cors'})
+                    .then(response => {
+                        // If the request was successful, get the response body as text
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            throw new Error('Error sending data');
+                        }
+                    })
+                    .then(value => {
+                        // Display the response from the server using window.alert()
+                        window.alert(value);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+            function postFetch() {
+                const input = document.querySelector('#form');
+                const name = document.querySelector('#imie');
+                const data = `name=${name.value}`;
+                fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: data
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            throw new Error('Error sending data');
+                        }
+                    })
+                    .then(value => {
+                        window.alert(`Witaj ${value}`);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+    body
+        main
+            form(method='get' action='/submit')
+                label
+                    | Perform a query to the web server with the
+                    strong GET
+                    |  method
+                input(type='submit' value='Without using AJAX or Fetch API')
+                input(type='button' value='Using AJAX' onclick='requestAJAX()')
+                input(type='button' value='Using Fetch API' onclick='requestFetchAPI()')
+            br
+            form(id='form')
+                input(type='text' id='imie' name='name')
+                input(type='submit' value='AJAX(GET)' onclick='getAJAX()')
+                input(type='submit' value='AJAX(POST)' onclick='postAJAX()')
+                input(type='button' value='FETCH(GET)' onclick='getFetch()')
+                input(type='button' value='FETCH(POST)' onclick='postFetch()')

@@ -1,0 +1,30 @@
+doctype html
+html(lang='en', data-bs-theme='dark')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        link(
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet")
+        title Your first page
+    body
+        h1 LAB 11 - express.js & mongodb
+        if sum
+            p= sum
+        if table
+            table
+                thead
+                    tr
+                        th x
+                        th operation
+                        th y
+                        th result
+                tbody
+                    each element in table
+                        tr
+                            td= element.x
+                            td= element.o
+                            td= element.y
+                            td= element.result
+
+

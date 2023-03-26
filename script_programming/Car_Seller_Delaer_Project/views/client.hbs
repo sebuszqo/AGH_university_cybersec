@@ -1,0 +1,18 @@
+<h2>Choose car that are going to be rented or returned !</h2>
+<form action="/client/return" method="POST">
+    <select name="returnId">
+        {{#each array}}
+            <option value="{{this.car}},{{this.name}}">name: {{this.name}} | brand: {{this.brand}} | model:{{this.model}} | year: {{this.year}}</option>
+        {{/each}}
+    </select>
+    <button type="submit">Return Your car</button>
+</form>
+<form action="/client/rent" method="POST">
+    <select name="rentId">
+        {{#each carsToRender}}
+            <option value="{{this.id}}">brand: {{this.brand}} | model: {{this.model}} | year: {{this.year}} | {{this.num}} szt.</option>
+        {{/each}}
+    </select>
+    <input type="text" name="name" placeholder="Podaj swoje imie">
+    <button type="submit">Rent Your car</button>
+</form>

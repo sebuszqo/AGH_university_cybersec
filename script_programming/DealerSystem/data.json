@@ -1,0 +1,31 @@
+{
+    
+    "cars": [
+{  
+    "brand": "bmw",
+    "number": 2,
+    "priceToRent": 300,
+    "priceToSell": 120120
+},
+{  
+    "brand": "skoda",
+    "number": 2,
+    "priceToRent": 200,
+    "priceToSell": 85000
+},
+{  
+    "brand": "volvo",
+    "number": 1,
+    "priceToRent": 350,
+    "priceToSell": 142000
+},
+{  
+    "brand": "seat",
+    "number": 1,
+    "priceToRent": 150,
+    "priceToSell": 75000
+}
+    ],
+"clients": []
+
+}
