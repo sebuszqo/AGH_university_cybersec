@@ -3,8 +3,8 @@
 
 This repository contains some of the courses I have taken during my time at university. It includes materials, assignments, codes and projects from a variety of subjects that I have studied. 
 
-    Syllabus:
-    *https://sylabusy.agh.edu.pl/pl/1/2/17/1/4/4/113*
+Syllabus:
+    https://sylabusy.agh.edu.pl/pl/1/2/17/1/4/4/113
 
 # Subjects:
 
