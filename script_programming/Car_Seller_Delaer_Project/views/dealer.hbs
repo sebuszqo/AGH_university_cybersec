@@ -1,0 +1,29 @@
+<h2>Choose car that are going to be sold !</h2>
+<form action="/dealer/sell" method="POST">
+    <select name="deleteId">
+        {{#each cars}}
+            <option value="{{this.id}}">brand: {{this.brand}} | model: {{this.model}} | year: {{this.year}} | {{this.num}} szt.</option>
+        {{/each}}
+    </select>
+    <button type="submit">Sell Your car</button>
+</form>
+<h2>Add a new car!</h2>
+<form action="/dealer/add" method="post">
+    <label>
+        Brand: <br>
+        <input type="text" name="brand" placeholder="Brand" minlength="3" maxlength="50"><br>
+    </label>
+    <label>
+        Model: <br>
+        <input type="text" name="model" placeholder="Brand" minlength="1" maxlength="50"><br>
+    </label>
+    <label>
+        Year of production: <br>
+        <input type="number" name="year"> <br>
+    </label>
+    <label>
+        Number of Cars: <br>
+        <input type="number" name="num" value="1" min="1"><br>
+    </label>
+    <button type="submit">Save NEW car</button>
+</form>

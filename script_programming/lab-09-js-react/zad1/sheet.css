@@ -1,0 +1,142 @@
+*{
+    padding: 0px;
+    margin: 10px;
+}
+.unset {
+    all: revert;
+}
+
+header {
+    display: block;
+    margin-bottom: 2%;
+    font-size: calc(1 * (1.5vw));
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0.3rem;
+}
+
+aside h1, aside h2, main h1 {
+    font-size: calc(1.2 * (1.5vw));
+}
+
+nav {
+    display: flex;
+    float: left;
+    margin-bottom: 2%;
+    padding: 0.5em;
+}
+
+aside  {
+    float: right;
+    height: 200px;
+    width: 50%;
+}
+
+main {
+    clear: left;
+    float: left;
+    width: 40%;
+    margin-bottom: 2%;
+}
+
+footer {
+    display: flex;
+    clear: both;
+    font-size: calc(0.7 * (1.5vw));
+    padding: 0.5em;
+}
+
+li {
+    font-size: calc(0.7 * (1.5vw));
+}
+
+blockquote {
+    margin: 0;
+}
+
+p {
+    font-size: calc(0.7 * (1.5vw));
+    padding: 0.5em;
+}
+
+.azure {
+    background-color: #EFF;
+    border: 2px solid #A8A8A8;
+    box-shadow: 0px 1px 5px black;
+}
+
+aside h1 {
+    color: red;
+    animation: colorchange 1s infinite alternate;
+    -webkit-animation: colorchange 1s infinite alternate;
+}
+
+form {
+    clear: both;
+    margin-bottom: 2%;
+    padding: 5px;
+    text-align: center;
+    display: block;
+}
+
+input {
+    width: 30%;
+    font-weight: bold;
+}
+
+@keyframes colorchange{
+    from {color: red;}
+    to {color: blue;}
+}
+
+@-webkit-keyframes colorchange{
+    from {color: red;}
+    to {color: blue;}
+}
+
+@media screen
+and (min-device-width: 200px)
+and (max-device-width: 800px){
+    header, aside, nav, main, footer {
+        clear: both;
+        float: left;
+    }
+    header {
+        font-size: 6vw;
+        width: 100%;
+    }
+    aside  {
+        height: 200px;
+        width: 100%;
+        margin-bottom: 2%;
+    }
+    aside h1, aside h2 {
+        font-size: 5vw;
+    }
+    nav {
+        width: 100%;
+        padding: 0;
+    }
+    main {
+        width: 100%;
+        font-size: 4vw;
+    }
+    main h1{
+        font-size: 7vw;
+    }
+    p {
+        font-size: 4vw;
+    }
+    footer {
+        width: 100%;
+        padding: 0px;
+        font-size: 3vw;
+        padding: 0.5em;
+    }
+    li {
+        font-size: 4vw;
+        padding: 0.5em;
+    }
+}

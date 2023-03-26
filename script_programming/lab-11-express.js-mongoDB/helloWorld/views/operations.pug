@@ -1,0 +1,27 @@
+doctype html
+html(lang='en', data-bs-theme='dark')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        link(
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet")
+        title Your first page
+    body
+        h1 LAB 11 - express.js & mongodb - operations
+        if table
+            table(class="table" border="solid 1px black")
+                thead
+                    tr
+                        th(width="60px") x
+                        th(width="60px") operation
+                        th(width="60px") y
+                        th(width="60px") result
+                tbody
+                    each element in table
+                        tr
+                            td(text-align="center")= element.x
+                            td(text-align="center")= element.o
+                            td(text-align="center")= element.y
+                            td(text-align="center")= element.result
+

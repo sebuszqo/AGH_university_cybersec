@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Page title
+    </title>
+</head>
+<body>
+<main>
+    <h1>
+        Płótno
+    </h1>
+
+    <h1>
+        Canvas
+    </h1>
+
+    <canvas id="canvas"
+            width="200"
+            height="300"
+            style="border:1px solid #000000;">
+        Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas" / It looks like your browser does not support the "canvas" element
+    </canvas>
+</main>
+<script>
+    // margines od prawej | margines od góry | szerokość | wysokość
+    let canvas = document.getElementById('canvas')
+    let ctx = canvas.getContext('2d')
+    ctx.fillStyle = "lightblue";
+    ctx.fillText('Hello Dealer', 75, 80)
+    ctx.beginPath();
+    ctx.fillRect(20, 185  ,160 ,35)
+    ctx.fillRect(50, 155  ,100 ,35)
+    ctx.arc(canvas.width /4, canvas.height * 3/4, 22, 0, 2 * Math.PI);
+    ctx.arc(canvas.width * 3/4, canvas.height * 3/4, 22, 0, 2 * Math.PI);
+    ctx.fill();
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+aside  {
+    /* Specyfikacja wyglądu */
+    /*display: flex;*/
+    float: right;
+    width: 550px;
+    padding: 20px;
+    margin: 50px;
+}
+
+aside h1 {
+    animation-name: color_changes;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+footer {
+    /* Specyfikacja wyglądu */
+    clear: both;
+    padding: 10px;
+    margin: 50px;
+}
+header {
+    /* Specyfikacja wyglądu */
+    display: block;
+    padding: 0;
+    margin: 50px;
+}
+header h1 {
+    padding: 10px;
+}
+
+main {
+    /* Specyfikacja wyglądu */
+    width: 450px;
+    float: left;
+    clear: left;
+    padding: 10px;
+    padding-bottom: 40px;
+    margin: 50px;
+}
+nav {
+    /* Specyfikacja wyglądu */
+    width: 130px;
+    float: left;
+    margin-left: 50px;
+    border: black;
+}
+nav ul {
+    /* Specyfikacja wyglądu */
+    margin: 20px 0px;
+}
+nav li {
+    /* Specyfikacja wyglądu */
+    width: 80px;
+    margin-left: 10px;
+}
+
+.azure {
+    background-color: azure;
+    border: 2px solid black;
+    box-shadow: 0px 0px 10px;
+}
+
+
+@keyframes color_changes {
+    from {color: red;}
+    to {color: blue;}
+}
+
+@media screen
+and (min-device-width: 200px)
+and (max-device-width: 800px){
+    body {
+        margin: 0;
+        font-size: 3vw;
+    }
+
+    aside,
+    header,
+    footer,
+    main,
+    nav {
+        /*clear: both;*/
+        width: 100%;
+        float: none;
+    }
+
+}
