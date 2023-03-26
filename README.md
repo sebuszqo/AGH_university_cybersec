@@ -1,4 +1,8 @@
 
+# My University Course Repository
+
+This repository contains some of the courses I have taken during my time at university. It includes materials, assignments, codes and projects from a variety of subjects that I have studied. 
+
 # Subjects:
 
 ## 1️⃣ semester:
