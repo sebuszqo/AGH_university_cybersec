@@ -5,10 +5,10 @@ import pyotp
 import segno
 import bcrypt
 
-
 def create_qr_code(secret):
-    return segno.make_qr(f'otpauth://totp/agh:sekn.kn@gmail.com?secret={secret}&issuer=TestAPP')
-
+    qr = segno.make_qr(f'otpauth://totp/agh:example@gmail.com?secret={secret}&issuer=TestAPP')
+    qr.save("test_qrcode.png")
+    messagebox.showinfo("Register App", "Register app using QR code saved in file: test_qrcode.png")
 
 def on_destroy():
     try:
@@ -16,13 +16,16 @@ def on_destroy():
     except FileNotFoundError:
         pass
 
-
-def register_new_otp(secret, qr_code):
-    qr_code.save("test_qrcode.png")
-    messagebox.showinfo("Register App", "Register app using QR code saved in file: test_qrcode.png")
-
+def register_new_otp(secret):
+    global isOPTRegistered
+    create_qr_code(secret)
+    isOPTRegistered = True
 
 def login(secret, username_entry, password_entry, id_entry, hashed_password):
+    if not isOPTRegistered:
+        messagebox.showerror("OTP", "REGISTER OTP FIRST")
+        return
+    
     validator = pyotp.TOTP(secret)
     valid = validator.verify(id_entry.get())
     user_input = username_field.get()
@@ -37,14 +40,11 @@ def login(secret, username_entry, password_entry, id_entry, hashed_password):
     id_entry.delete(0, tk.END)
     on_destroy()
 
-
 USERNAME = 'agh'
 PASSWORD_HASH = "$2a$12$TET1g55hZP51FtEqs3bXWO7FwOLF.I4H8BD5DkmLcs8udCCF5wvrW" # ! normally hash would be stored in database without password in cleartext !
-
 SECRET = pyotp.random_base32()
-QR_CODE = create_qr_code(SECRET)
+isOPTRegistered = False  # Flag to check if OTP is registered
 
-# Ustawienia GUI
 root = tk.Tk()
 root.geometry('600x400+20+20')
 root.title("Login Window")
@@ -64,7 +64,7 @@ id_field.grid(row=2, column=1)
 login_button = tk.Button(root, text="Login", command=lambda: login(SECRET, username_field, password_field, id_field, PASSWORD_HASH))
 login_button.grid(row=4, columnspan=2)
 
-register_button = tk.Button(root, text="Register a New ID", command=lambda: register_new_otp(SECRET, QR_CODE))
+register_button = tk.Button(root, text="Register a New ID", command=lambda: register_new_otp(SECRET))
 register_button.grid(row=5, columnspan=2)
 
 root.mainloop()
